@@ -1,4 +1,4 @@
-require('../JS-Hash');
+require('../js-lookup');
 require('../index');
 var test = require('tape');
 

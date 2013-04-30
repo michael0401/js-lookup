@@ -1,2 +1,2 @@
-require('./JS-Hash');
+require('./js-lookup');
 
