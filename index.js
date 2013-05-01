@@ -1,2 +1,2 @@
-require('./js-lookup');
+hashUtils = require('./js-lookup');
 

@@ -1,13 +1,12 @@
-require('../js-lookup');
 require('../index');
 var test = require('tape');
 
 test('JS-Hash', function(t) {	
-	var hash = new Hash.Table({'a': 'yes!', 'b': 'no!'})
+	var hash = hashUtils.Hash({'a': 'yes!', 'b': 'no!'})
 	, post;
 	
-	t.plan(9);
-	t.equal(hash.each().length, 2);
+	t.plan(14);
+	t.equal(hash.each().length, hash.getLength());
 	
 	hash.set('c', '123');
 	t.equal(hash.get('c'), '123');
@@ -23,7 +22,17 @@ test('JS-Hash', function(t) {
 	t.equal(hash.contains('a'), false);
 	
 	t.equal(hash.contains('d'), true)
-	t.equal(hash.keys()[0], 'd');
+	t.equal(hash.get(hash.keys()[0]), hash.first());
+	
+	hash.update({'another': 'maybe', 'and-another': 'maybe-not'});
+	t.equal(hash.get('another'), 'maybe');
+	t.equal(hash.pick('and-another', 'another')['another'], 'maybe');
+	t.equal(hash.pick(['and-another', 'another'])['and-another'], 'maybe-not');
+	
+	hash.empty();
+	t.equal(typeof hash.get('a'), 'undefined');
+	hash.restore();
+	t.equal(hash.post()['a'], 'yes!');	
 	
 });
 
