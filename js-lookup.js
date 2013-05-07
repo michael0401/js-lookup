@@ -37,7 +37,6 @@
 		var item;
 		this.values = init || {};
 		this.original = {};
-		this.defaults = defaults;
 		
 		for (item in init) {
 			if (init.hasOwnProperty(item)) {
@@ -54,7 +53,7 @@
 	Hash._Table.prototype.store = Hash._Table.prototype.set;
 
 	Hash._Table.prototype.get = function (name) {			
-		return this.values[name];
+		return this.values && this.values[name];
 	};
 	Hash._Table.prototype.lookup = Hash._Table.prototype.get;
 	Hash._Table.prototype.find = Hash._Table.prototype.get;
