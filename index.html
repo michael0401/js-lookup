@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Js-hash.js by michael0401</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Js-hash.js</h1>
+        <p class="header">hash;hash table;hash-table;</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/michael0401/js-lookup/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/michael0401/js-lookup/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/michael0401/js-lookup">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/michael0401">michael0401</a></p>
+
+
+      </header>
+      <section>
+        <h1>JS-Hash.js</h1>
+
+<p>js-hash.js is a utility module which provide functions for operating with hash-table. It can be used both in the <a href="http://nodejs.org">node.js</a> and browser.</p>
+
+<h2>Download</h2>
+
+<p>The source code is available for download from <a href="https://github.com/rranauro/js-lookup">GitHub</a>. Besides that, you can also install using Node Package Manager <a href="https://npmjs.org">npm</a>:</p>
+
+<pre><code>npm install js-hash
+</code></pre>
+
+<h2>Documentation</h2>
+
+<ul>
+<li><a href="#hashUtils.Hash">hashUtils.Hash</a></li>
+<li><a href="#set">set</a></li>
+<li><a href="#get">get</a></li>
+<li><a href="#contains">contains</a></li>
+<li><a href="#post">post</a></li>
+<li><a href="#getLength">getLength</a></li>
+<li><a href="#remove">remove</a></li>
+<li><a href="#each">each</a></li>
+<li><a href="#keys">keys</a></li>
+<li><a href="#first">first</a></li>
+<li><a href="#update">update</a></li>
+<li><a href="#pick">pick</a></li>
+<li><a href="#restore">restore</a></li>
+<li><a href="#empty">empty</a></li>
+</ul><p><a name="hashUtils.Hash"></a></p>
+
+<h3>hashUtils.Hash(object)</h3>
+
+<p>Initialize and return a hash table with the given values object.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>var hash = hashUtils.Hash({'a': 'yes!', 'b': 'no!'});
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+<tr>
+<td>a</td>
+<td>yes!</td>
+  </tr>
+<tr>
+<td>b</td>
+<td>no!</td>
+  </tr>
+</table><p><a name="set"></a></p>
+
+<h3>set(key, value)</h3>
+
+<p>Set the new value to the given key. If the given key does not exist in the hash table, add this new key-value pair to the hash table.</p>
+
+<p><strong>Alias:</strong> store</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.set('c', '123');
+hash.set('a', '1');
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+<tr>
+<td>a</td>
+<td>1</td>
+  </tr>
+<tr>
+<td>b</td>
+<td>no!</td>
+  </tr>
+<tr>
+<td>c</td>
+<td>123</td>
+  </tr>
+</table><p><a name="get"></a></p>
+
+<h3>get(key)</h3>
+
+<p>Return the value based on the given key. If the given key does not exist in the hash table, return undefined.</p>
+
+<p><strong>Alias:</strong> lookup; find</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.get('c');
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<pre><code>123
+</code></pre>
+
+<p><a name="contains"></a></p>
+
+<h3>contains(key)</h3>
+
+<p>If the key exists in the hash table, return true; if the key does not exist in the hash table, return false.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.contains('c');
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<pre><code>true
+</code></pre>
+
+<p><a name="post"></a></p>
+
+<h3>post(argument)</h3>
+
+<p>If there is no argument, return the values object of the hash table; if the argument is an object, replace the old values object with the new one and return the new values object.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.post({'a':1, 'b':2, 'd':3 });
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+<tr>
+<td>a</td>
+<td>1</td>
+  </tr>
+<tr>
+<td>b</td>
+<td>2</td>
+  </tr>
+<tr>
+<td>d</td>
+<td>3</td>
+  </tr>
+</table><p><a name="getLength"></a></p>
+
+<h3>getLength()</h3>
+
+<p>Return the total number of the items in the hash table.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.getLength();
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<pre><code>3  
+</code></pre>
+
+<p><a name="remove"></a></p>
+
+<h3>remove(key)</h3>
+
+<p>If the given key exists in the hash table, delete the items from the hash table based on the given key and return the hash table. If the given key does not exist in the hash table, return the hash table.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.remove('a');
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+<tr>
+<td>b</td>
+<td>2</td>
+  </tr>
+<tr>
+<td>d</td>
+<td>3</td>
+  </tr>
+</table><p><a name="each"></a></p>
+
+<h3>each()</h3>
+
+<p>Return the values of the hash table as an array.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.each();
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<pre><code>{2,3}   
+</code></pre>
+
+<p><a name="keys"></a></p>
+
+<h3>keys()</h3>
+
+<p>Return the keys of the hash table as an array.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.keys();  
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<pre><code>{b,d} 
+</code></pre>
+
+<p><a name="first"></a></p>
+
+<h3>first()</h3>
+
+<p>Return the value of the first item in the hash table.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.first();  
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<pre><code>2
+</code></pre>
+
+<p><a name="update"></a></p>
+
+<h3>update(object)</h3>
+
+<p>Bulk update the values object of the hast table.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.update({'a':100, 'd':900 });  
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+<tr>
+<td>b</td>
+<td>2</td>
+  </tr>
+<tr>
+<td>d</td>
+<td>900</td>
+  </tr>
+<tr>
+<td>a</td>
+<td>100</td>
+  </tr>
+</table><p><a name="pick"></a></p>
+
+<h3>pick(argument)</h3>
+
+<p>Returns an object containing only the selected keys. Argument can be an array of strings or separate argument strings.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.pick(['a','b']);
+hase.pick('a','b');
+</code></pre>
+
+<p><strong>Result:</strong>
+    {'a': 100, 'b': 2}    </p>
+
+<p><a name="restore"></a></p>
+
+<h3>restore()</h3>
+
+<p>Returns the object values to its original state.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.restore();
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+<tr>
+<td>a</td>
+<td>yes!</td>
+  </tr>
+<tr>
+<td>b</td>
+<td>no!</td>
+  </tr>
+</table><p><a name="empty"></a></p>
+
+<h3>empty()</h3>
+
+<p>Empty the hast table.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>hash.empty();
+</code></pre>
+
+<p><strong>Result:</strong></p>
+
+<table>Hash Table
+  <tr>
+<th>Key</th>
+<th>Value</th>
+  </tr>
+</table>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
