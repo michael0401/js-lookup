@@ -34,13 +34,15 @@
 	var Hash = function() {};
 
 	Hash._Table = function(init) {
-		var item;
-		this.values = init || {};
+		var item
+		, newItem;
+		this.values = {};
 		this.original = {};
+		
 		
 		for (item in init) {
 			if (init.hasOwnProperty(item)) {
-				this.original[item] = init[item];
+				this.values[item] = this.original[item] = init[item];
 			}
 		}
 		return this;
@@ -74,7 +76,9 @@
 		, count = 0;
 
 		for (k in this.values) {
-			count += 1;
+			if (this.values.hasOwnProperty(k)) {
+				count += 1;				
+			}
 		}
 		return count;
 	};
@@ -92,7 +96,9 @@
 		, obj;
 
 		for (obj in this.values) {
-			objectArray.push(this.values[obj]);
+			if (this.values.hasOwnProperty(obj)) {
+				objectArray.push(this.values[obj]);				
+			}
 		}
 		return objectArray;
 	};
@@ -102,7 +108,9 @@
 		, obj;
 
 		for (obj in this.values) {
-			keyArray.push(obj);
+			if (this.values.hasOwnProperty(obj)) {
+				keyArray.push(obj);				
+			}
 		}
 		return keyArray;
 	};
@@ -131,7 +139,7 @@
 		, target = {};
 		
 		// accepts arguments as either array of items to pick, or argument list of items
-		if (typeof arguments[0] === 'string') {
+		if (typeof args === 'string') {
 			// convert the arguments list to an array
 			for (i=0; i < arguments.length; i += 1) {
 				list.push(arguments[i]);
@@ -150,9 +158,17 @@
 	Hash._Table.prototype.restore = function () {
 		var item;
 		
-		this.values = {};
+//		this.values = {};
+		for (item in this.values) {
+			if (this.values.hasOwnProperty(item)) {
+				this.values[item] = undefined;
+			}
+		}
 		for (item in this.original) {
 			if (this.original.hasOwnProperty(item)) {
+				if (item === 'display') {
+					console.log('setting', item, this.original[item]);
+				}
 				this.values[item] = this.original[item];
 			}
 		}
