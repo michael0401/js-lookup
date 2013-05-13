@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #JS-Hash.js
 
 js-hash.js is a utility module which provide functions for operating with hash-table. It can be used both in the [node.js](http://nodejs.org) and browser.
@@ -287,3 +288,7 @@ __Result:__
     <th>Key</th><th>Value</th>
   </tr>
 </table>
+=======
+Test purpose
+--------------
+>>>>>>> 13b560585f0f8fee3748e9345a886a1d37dbca9c
