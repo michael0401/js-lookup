@@ -166,9 +166,6 @@
 		}
 		for (item in this.original) {
 			if (this.original.hasOwnProperty(item)) {
-				if (item === 'display') {
-					console.log('setting', item, this.original[item]);
-				}
 				this.values[item] = this.original[item];
 			}
 		}
