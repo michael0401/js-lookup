@@ -2,7 +2,7 @@ require('../index');
 var test = require('tape');
 
 test('JS-Hash', function(t) {	
-	var hash = hashUtils.Hash({'a': 'yes!', 'b': 'no!'})
+	var hash = UTIL.hash({'a': 'yes!', 'b': 'no!'})
 	, post;
 	
 	t.plan(14);

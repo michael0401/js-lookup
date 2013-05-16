@@ -25,15 +25,7 @@
 	"use strict";
 	var hashUtils;
 	
-	if (typeof exports !== 'undefined') {
-		hashUtils = exports;
-	} else {
-		hashUtils = global.hashUtils = {};
-	}
-	
-	var Hash = function() {};
-
-	Hash._Table = function(init) {
+	var Hash = function(init) {
 		var item
 		, newItem;
 		this.values = {};
@@ -45,33 +37,33 @@
 				this.values[item] = this.original[item] = init[item];
 			}
 		}
-		return this;
+		return this;		
 	};
 
-	Hash._Table.prototype.set = function (name, value) {
+	Hash.prototype.set = function (name, value) {
 		this.values[name] = value;
 		return this;
 	};
-	Hash._Table.prototype.store = Hash._Table.prototype.set;
+	Hash.prototype.store = Hash.prototype.set;
 
-	Hash._Table.prototype.get = function (name) {			
+	Hash.prototype.get = function (name) {			
 		return this.values && this.values[name];
 	};
-	Hash._Table.prototype.lookup = Hash._Table.prototype.get;
-	Hash._Table.prototype.find = Hash._Table.prototype.get;
+	Hash.prototype.lookup = Hash.prototype.get;
+	Hash.prototype.find = Hash.prototype.get;
 
-	Hash._Table.prototype.contains = function (name) {
+	Hash.prototype.contains = function (name) {
 		return (typeof this.get(name) !== 'undefined');
 	};
 
-	Hash._Table.prototype.post = function (v) {
+	Hash.prototype.post = function (v) {
 		if (v) {
 			this.values = v;
 		}
 		return this.values;
 	};
 
-	Hash._Table.prototype.getLength = function () {
+	Hash.prototype.getLength = function () {
 		var k
 		, count = 0;
 
@@ -84,14 +76,14 @@
 	};
 
 	// What it does: Remove an item from the Hash
-	Hash._Table.prototype.remove = function (name) {
+	Hash.prototype.remove = function (name) {
 		if (this.values[name]) {
 			delete this.values[name];
 		}
 		return this;
 	};
 	// What it does: Return the Hash as an array so it can be used as an argument to map/reduce
-	Hash._Table.prototype.each = function () {
+	Hash.prototype.each = function () {
 		var objectArray = []
 		, obj;
 
@@ -103,7 +95,7 @@
 		return objectArray;
 	};
 
-	Hash._Table.prototype.keys = function () {
+	Hash.prototype.keys = function () {
 		var keyArray = []
 		, obj;
 
@@ -115,12 +107,12 @@
 		return keyArray;
 	};
 
-	Hash._Table.prototype.first = function () {
+	Hash.prototype.first = function () {
 		return(this.get(this.keys()[0]));		
 	};
 	
 	// What it does: Bulk update the properties of the Hash
-	Hash._Table.prototype.update = function (properties) {
+	Hash.prototype.update = function (properties) {
 		var property;
 		
 		for (property in properties) {
@@ -133,7 +125,7 @@
 	
 	// What it does: Returns an object containing only the selected items. args can be an Array of strings
 	// or separate argument strings
-	Hash._Table.prototype.pick = function (args) {
+	Hash.prototype.pick = function (args) {
 		var i
 		, list = []
 		, target = {};
@@ -155,7 +147,7 @@
 		return target;
 	};
 	// What it does: Returns the object values to its original state
-	Hash._Table.prototype.restore = function () {
+	Hash.prototype.restore = function () {
 		var item;
 		
 //		this.values = {};
@@ -172,14 +164,25 @@
 		return this;
 	};
 	
-	Hash._Table.prototype.empty = function () {
+	Hash.prototype.empty = function () {
 		return this.post({});
 	};
 	
-	hashUtils.Hash = function (obj) {
-		return new Hash._Table(obj);
+	var hash = function (o) {
+		return new Hash(o);
 	};
 
+	if (typeof exports !== 'undefined') {
+		if (typeof module !== 'undefined' && module.exports) {
+	      exports = module.exports = hash;
+	    }
+		exports.hash = hash;
+	} else {
+		if (typeof global.UTIL === 'undefined') {
+			global.UTIL = {};
+		}
+		global.UTIL.hash = hash;
+	}
 	
 }(this));
 	
